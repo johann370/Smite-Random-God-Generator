@@ -59,3 +59,8 @@ def export_gods_to_csv():
     gods = get_gods_updated()
     df = pd.DataFrame(gods)
     df.to_csv('gods.csv')
+
+
+if __name__ == "__main__":
+    export_gods_to_csv()
+
