@@ -39,7 +39,7 @@ def get_gods_updated():
         god_data = god.find_all('td')
         name = god_data[1].text
         href = god_data[1].find('a').get('href')
-        link = f'=HYPERLINK("https://smite.fandom.com{href}")'
+        link = f'https://smite.fandom.com{href}'
         pantheon = god_data[2].text
         god_class = god_data[5].text
         release_date = god_data[9].text
@@ -49,7 +49,7 @@ def get_gods_updated():
             'Link': link,
             'Pantheon': pantheon,
             'Class': god_class,
-            'Release Date': release_date
+            'Release_Date': release_date
         }
         gods_list.append(god_info)
     return gods_list
