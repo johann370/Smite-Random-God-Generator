@@ -35,3 +35,10 @@ if __name__ == '__main__':
 
     random_god = get_random_god(god_list)
     print(random_god.get_name())
+    reroll = input('Would you like to reroll? (Y/N): ')
+
+    while(reroll == 'Y'):
+        random_god = get_random_god(god_list)
+        print(random_god.get_name())
+        reroll = input('Would you like to reroll? (Y/N): ')
+
