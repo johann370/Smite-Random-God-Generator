@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 import pandas as pd
 import urllib.request
-import concurrent.futures
 import requests
 
 
