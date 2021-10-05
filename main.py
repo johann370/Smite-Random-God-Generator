@@ -29,16 +29,18 @@ def get_random_god(god_list):
     return random_god
 
 
-if __name__ == '__main__':
-    #subprocess.call('god-scraper.py', shell=True)
+def get_god_image(god):
+    return f'./images/{god.get_name()}.jpg'
+
+
+
+def main():
+    # subprocess.call('god-scraper.py', shell=True)
     god_list = create_god_objects(get_gods_list())
 
     random_god = get_random_god(god_list)
-    print(random_god.get_name())
-    reroll = input('Would you like to reroll? (Y/N): ')
+    return random_god
 
-    while(reroll == 'Y'):
-        random_god = get_random_god(god_list)
-        print(random_god.get_name())
-        reroll = input('Would you like to reroll? (Y/N): ')
 
+if __name__ == '__main__':
+    main()
