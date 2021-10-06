@@ -1,4 +1,3 @@
-import subprocess
 import GUI
 import god_scraper
 
