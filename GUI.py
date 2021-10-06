@@ -3,29 +3,35 @@ from tkinter import ttk
 from main import *
 from PIL import Image, ImageTk
 
-root = tk.Tk()
-root.title('Random God Generator')
-root.geometry('1000x1000')
-image_label = ttk.Label(root)
-name_label = ttk.Label(root, font=('Helvetica', 20))
+
+def initialize_checkbutton_variables(gods):
+    for god in gods:
+        checkbutton_variables[f'{god.get_name()}'] = tk.BooleanVar(value=True)
 
 
 def button_clicked():
-    random_god = main()
-    god_image_path = get_god_image(random_god)
-    god_image = ImageTk.PhotoImage(Image.open(god_image_path))
-    image_label.configure(image=god_image)
-    image_label.image = god_image
-    name_label.configure(text=random_god.get_name())
-    name_label.pack()
-    image_label.pack()
-    button.configure(text='Reroll')
+    filtered_gods = get_filtered_gods(gods)
+    if len(filtered_gods) > 0:
+        random_god = get_random_god(filtered_gods)
+
+        god_image_path = get_god_image(random_god)
+        god_image = ImageTk.PhotoImage(Image.open(god_image_path))
+        image_label.configure(image=god_image)
+        image_label.image = god_image
+
+        name_label.configure(text=random_god.get_name())
+
+        name_label.pack()
+        image_label.pack()
+        button.configure(text='Reroll')
 
 
-button = ttk.Button(root, text='Get God', command=button_clicked)
-button.pack()
-
-checkbuttonVariables = dict()
+def get_filtered_gods(gods):
+    filtered_gods = list()
+    for god in gods:
+        if checkbutton_variables[f'{god.get_name()}'].get():
+            filtered_gods.append(god)
+    return filtered_gods
 
 
 def create_filter_gods_window():
@@ -37,17 +43,30 @@ def create_filter_gods_window():
     content.pack()
 
     for god in gods:
-        checkbuttonVariables[f'{god.get_name()}'] = tk.BooleanVar(value=True)
         cb = ttk.Checkbutton(content, text=f'{god.get_name()}', padding=15,
-                             variable=checkbuttonVariables[f'{god.get_name()}'],
+                             variable=checkbutton_variables[f'{god.get_name()}'],
                              onvalue=True, offvalue=False)
         cb.grid(column=grid_col, row=grid_row)
-        if (grid_col == 5):
+        if grid_col == 5:
             grid_col = 0
             grid_row += 1
         else:
             grid_col += 1
 
+
+root = tk.Tk()
+root.title('Random God Generator')
+root.geometry('1000x1000')
+image_label = ttk.Label(root)
+name_label = ttk.Label(root, font=('Helvetica', 20))
+
+checkbutton_variables = dict()
+gods = get_gods_list()
+
+initialize_checkbutton_variables(gods)
+
+button = ttk.Button(root, text='Get God', command=button_clicked)
+button.pack()
 
 filter_button = ttk.Button(root, text='Filter Gods', command=create_filter_gods_window)
 filter_button.pack()
