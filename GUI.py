@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from main import main
-from main import get_god_image
+from main import *
 from PIL import Image, ImageTk
 
 root = tk.Tk()
@@ -25,5 +24,32 @@ def button_clicked():
 
 button = ttk.Button(root, text='Get God', command=button_clicked)
 button.pack()
+
+checkbuttonVariables = dict()
+
+
+def create_filter_gods_window():
+    filter_window = tk.Toplevel(root)
+    content = ttk.Frame(filter_window)
+    gods = get_gods_list()
+    grid_row = 0
+    grid_col = 0
+    content.pack()
+
+    for god in gods:
+        checkbuttonVariables[f'{god.get_name()}'] = tk.BooleanVar(value=True)
+        cb = ttk.Checkbutton(content, text=f'{god.get_name()}', padding=15,
+                             variable=checkbuttonVariables[f'{god.get_name()}'],
+                             onvalue=True, offvalue=False)
+        cb.grid(column=grid_col, row=grid_row)
+        if (grid_col == 5):
+            grid_col = 0
+            grid_row += 1
+        else:
+            grid_col += 1
+
+
+filter_button = ttk.Button(root, text='Filter Gods', command=create_filter_gods_window)
+filter_button.pack()
 
 root.mainloop()
