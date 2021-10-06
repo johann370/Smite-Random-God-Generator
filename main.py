@@ -1,14 +1,16 @@
 import subprocess
+import GUI
+import god_scraper
 
 
 def update():
     update = input('Would you like to update the gods list/images? (Y/N): ')
     if update == 'Y':
-        subprocess.call('god_scraper.py', shell=True)
+        god_scraper.main()
 
 
 def run_program():
-    subprocess.call('GUI.py', shell=True)
+    GUI.main()
 
 
 if __name__ == '__main__':

@@ -1,3 +1,4 @@
+import os
 from bs4 import BeautifulSoup
 import pandas as pd
 import urllib.request
@@ -51,7 +52,8 @@ def export_gods_to_csv(gods):
     df.to_csv('gods.csv', index=False)
 
 
-if __name__ == "__main__":
+def main():
+    os.mkdir('./images/')
     gods = get_gods()
     export_gods_to_csv(gods)
     links = list()
