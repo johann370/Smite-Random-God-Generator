@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from main import *
+from get_random_god import *
 from PIL import Image, ImageTk
 
 
