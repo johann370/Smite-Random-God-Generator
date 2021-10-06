@@ -6,7 +6,7 @@ from God import God
 
 def get_gods_list():
     data = pd.read_csv('gods.csv')
-    return data
+    return create_god_objects(data)
 
 
 def create_god_objects(god_list):
@@ -33,10 +33,9 @@ def get_god_image(god):
     return f'./images/{god.get_name()}.jpg'
 
 
-
 def main():
     # subprocess.call('god-scraper.py', shell=True)
-    god_list = create_god_objects(get_gods_list())
+    god_list = get_gods_list()
 
     random_god = get_random_god(god_list)
     return random_god
